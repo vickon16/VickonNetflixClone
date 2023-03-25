@@ -10,10 +10,9 @@ import { useNavigate } from 'react-router-dom';
 import { Slides } from '../utils/selectionFIlter';
 import FooterContainer from "../containers/FooterContainer"
 import Fuse from 'fuse.js';
-import LoaderContainer from './LoaderContainer';
 
 const HomeContainer = () => {
-  const { firebaseData, dataLoading } = useFirebaseContext();
+  const { firebaseData } = useFirebaseContext();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [category, setCategory] = useState("series");
