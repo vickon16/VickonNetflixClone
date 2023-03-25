@@ -13,7 +13,6 @@ const initialState = {
 const useInitialLoad = () => {
   const [firebaseData, setFirebaseData] = useState(initialState);
   const [isAppLoaded, setIsAppLoaded] = useState(true);
-  const [dataLoading, setIsDataLoading] = useState(false);
 
   //load userdata on authentication change
   useEffect(() => {
@@ -21,7 +20,6 @@ const useInitialLoad = () => {
     const unSub = onAuthStateChanged(auth, (user) => {
       if (user) setFirebaseData((prev) => ({ ...prev, user: user }));
       setIsAppLoaded(false);
-      setIsDataLoading(true)
     });
 
     return () => unSub();
@@ -35,7 +33,6 @@ const useInitialLoad = () => {
         id : doc.id
       }))
       setFirebaseData(prev => ({...prev, films : allFilms}))
-      setIsDataLoading(false);
     })
 
     return () => unSub();
@@ -49,13 +46,12 @@ const useInitialLoad = () => {
         id: doc.id,
       }));
       setFirebaseData((prev) => ({ ...prev, series: allSeries }));
-      setIsDataLoading(false);
     });
 
     return () => unSub();
   }, []);
 
-  return {firebaseData, isAppLoaded, dataLoading, setFirebaseData, setIsAppLoaded};
+  return {firebaseData, isAppLoaded, setFirebaseData, setIsAppLoaded};
 }
 
 export default useInitialLoad
